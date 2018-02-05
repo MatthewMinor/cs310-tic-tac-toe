@@ -1,3 +1,6 @@
+
+import java.util.Scanner;
+
 package edu.jsu.mcis;
 
 public class TicTacToeView {
@@ -17,6 +20,10 @@ public class TicTacToeView {
         /* Print the board to the console (see examples) */
         
         /* INSERT YOUR CODE HERE */
+        System.out.println("\n  012");
+        System.out.println("0 ---");
+        System.out.println("1 ---");
+        System.out.println("2 ---\n");
 
     }
 
@@ -25,7 +32,10 @@ public class TicTacToeView {
         /* Display a prompt for the player's next move (see examples) */
 
         /* INSERT YOUR CODE HERE */
-
+        System.out.println("Player 1 (X) move: \nEnter the row and column numbers, seperated by a space: ");
+        Scanner in = new Scanner(System.in);
+        int rowInput = in.nextInt();
+        int colInput = in.nextInt();
     }
 
     public void showInputError() {
@@ -33,6 +43,7 @@ public class TicTacToeView {
         /* Display an error if input is invalid (see examples) */
 
         /* INSERT YOUR CODE HERE */
+        
 
     }
 
