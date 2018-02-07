@@ -93,32 +93,35 @@ public class TicTacToeModel{
            empty! */
         
         /*DONE INSERT YOUR CODE HERE */
-		if(isValidSquare(row, col)){
-			if(xTurn && grid[row][col] == Mark.EMPTY){
-				grid[row][col] = Mark.X;
-			}
-			else{
-				grid[row][col] = Mark.O;
-			}
-		}
+        if(isValidSquare(row, col) && isSquareMarked(row, col) == false){
+                if(xTurn && grid[row][col] == Mark.EMPTY){
+                        grid[row][col] = Mark.X;
+                }
+                else if(!xTurn && grid[row][col] == Mark.EMPTY){
+                        grid[row][col] = Mark.O;
+                }
+        }
+        
+        xTurn = !xTurn;
+
         return false; /* remove this line! */
         
     }
 	
-    private boolean isValidSquare(int row, int col) {
+    public boolean isValidSquare(int row, int col) {
         
         /* Return true if specified location is within grid bounds */
         
         /*DONE INSERT YOUR CODE HERE */
 		if(row >= 0 && row <= DEFAULT_WIDTH-1 || col >= 0 && col <= DEFAULT_WIDTH-1){
-				return true;
+                    return true;
 		}
-                else{
+		else{
                     return false;
-                }
+		}
     }
 	
-    private boolean isSquareMarked(int row, int col) {
+    public boolean isSquareMarked(int row, int col) {
         
         /* Return true if square at specified location is marked */
         
@@ -136,7 +139,7 @@ public class TicTacToeModel{
         /* Return mark from the square at the specified location */
         
         /*DONE INSERT YOUR CODE HERE */
-	Mark mark = grid[row][col];
+		Mark mark = grid[row][col];
 
         return mark; 
             
@@ -158,9 +161,10 @@ public class TicTacToeModel{
 		else if(isTie()){
 			return Result.TIE;
 		}
-		else if(isGameover()){
-			return Result.none;
-		}
+                else{
+                    return Result.NONE;
+                }
+                
     }
 	
     private boolean isMarkWin(Mark mark) {
@@ -169,59 +173,67 @@ public class TicTacToeModel{
            winner */
         
         /*DONE INSERT YOUR CODE HERE */
-		boolean win = false;
-		int countMarks = 0;
-		//check win vertical
-		for(int i = 0; i < DEFAULT_WIDTH; i++){
-			for(int j = 0; j< DEFAULT_WIDTH; j++){
-				if(grid[j][i].equals(mark)){
-					countMarks++;
-				}
-                                if(countMarks == DEFAULT_WIDTH){
-                                    win = true;
-                                }
-			}
-                        countMarks = 0;
-		}
-		
-		//check win horizontal
-		for(int i = 0; i < DEFAULT_WIDTH; i++){
-			for(int j = 0; j < DEFAULT_WIDTH; j++){
-				if(!grid[i][j].equals(mark)){
-					countMarks++;
-				}
-                                if(countMarks == DEFAULT_WIDTH){
-                                    win = true;
-                                }
-			}
-                        countMarks = 0;
-		}
-		
-		//check diagonal from left to right
-		for(int i = 0; i < DEFAULT_WIDTH; i++){
-			if(grid[i][i].equals(mark)){
-                           countMarks++; 
-			}
-                        if(countMarks == DEFAULT_WIDTH){
-                            win = true;
-                        }
-		}
-                countMarks = 0;
-		
-		//check diagonal from right to left
-		for(int i = (DEFAULT_WIDTH-1); i >=0; i--){
-			win = true;
-			for(int j =0; j< DEFAULT_WIDTH; j++){
-				if(grid[j][i].equals(mark)){
-					countMarks++;
-				}
-                                if(countMarks == DEFAULT_WIDTH){
-                                    win = true;
-                                }
-			}
-                        countMarks = 0;
-		}
-                return win;
+        int countMarks = 0;
+        //check win vertical
+        for(int row = 0; row < DEFAULT_WIDTH; row++){
+            for(int col = 0; col< DEFAULT_WIDTH; col++){
+                if(getMark(col, row) == mark){
+                        countMarks++;
+                }
+                else{
+                    countMarks = 0;
+                }
+                if(countMarks == DEFAULT_WIDTH){
+                    return true;
+                }
+            }
+            countMarks = 0;
+        }
+
+        //check win horizontal
+        for(int row = 0; row < DEFAULT_WIDTH; row++){
+            for(int col = 0; col < DEFAULT_WIDTH; col++){
+                if(getMark(row, col) == mark){
+                        countMarks++;
+                }
+                else{
+                    countMarks = 0;
+                }
+                if(countMarks == DEFAULT_WIDTH){
+                    return true;
+                }
+            }
+            countMarks = 0;
+        }
+
+        //check diagonal from left to right
+        for(int i = 0; i < DEFAULT_WIDTH; i++){
+                if(getMark(i, i) == mark){
+                   countMarks++; 
+                }
+                if(countMarks == DEFAULT_WIDTH){
+                    return true;
+                }
+        }
+        countMarks = 0;
+
+        //check diagonal from right to left
+        for(int i = (DEFAULT_WIDTH-1); i >=0; i--){
+            for(int j =0; j< DEFAULT_WIDTH; j++){
+                   
+                if(countMarks == DEFAULT_WIDTH){
+                    return true;
+                } 
+                if(getMark(j, i) == mark){
+                        countMarks++;
+                }
+                if(countMarks == DEFAULT_WIDTH){
+                    return true;
+                }
+            }
+            countMarks = 0;
+        }
+        return false;
     }
 	
     private boolean isTie() {
@@ -229,27 +241,18 @@ public class TicTacToeModel{
         /* Check the squares of the board to see if the game is a tie */
 
         /* INSERT YOUR CODE HERE */
-		boolean tie;
-		for(int i = 0; i < DEFAULT_WIDTH; i++){
-                    for(int j = 0; j < DEFAULT_WIDTH; j++){
-			if(grid[i][j].equals(Mark.EMPTY)){
-				tie = false;
-			}
-                        else{
-                            return true;
-                        }
-                    }
-		}
-		return true;
-        
+        for(int i = 0; i < DEFAULT_WIDTH; i++){
+            for(int j = 0; j < DEFAULT_WIDTH; j++){
+                if(grid[i][j].equals(Mark.EMPTY)){
+                        return false;
+                }
+            }
+        }
+        return true;
     }
 
     public boolean isGameover(){
-        
-        /* Return true if the game is over */
-        
         return Result.NONE != getResult();
-        
     }
 
     public boolean isXTurn(){
