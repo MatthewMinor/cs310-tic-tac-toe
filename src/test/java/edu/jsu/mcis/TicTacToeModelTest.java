@@ -47,7 +47,6 @@ public class TicTacToeModelTest {
         assertEquals(TicTacToeModel.Mark.EMPTY, board.getMark(2,0));
         assertTrue(board.makeMark(2,0));
         assertEquals(TicTacToeModel.Mark.O, board.getMark(2,0));
-        
     }
 
     @Test

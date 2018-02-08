@@ -39,7 +39,6 @@ public class TicTacToe {
         /* Game is over; show the final board and the winner */
 
         view.viewModel();
-
         view.showResult(model.getResult().toString());
 
     }

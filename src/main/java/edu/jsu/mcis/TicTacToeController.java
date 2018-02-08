@@ -27,9 +27,9 @@ public class TicTacToeController {
         
         /* Prompt player for next move using view's showNextMovePrompt() */
         
-        view.showNextMovePrompt();
-	int row = keyboard.nextInt();
-	int col = keyboard.nextInt();
+		view.showNextMovePrompt();
+		int row = keyboard.nextInt();
+		int col = keyboard.nextInt();
         
         /* Receive and validate input, which should be read at the keyboard as
            two integers, the row and the column (for example, "1 1" for the
@@ -38,11 +38,10 @@ public class TicTacToeController {
         
         /* INSERT YOUR CODE HERE */
         if(model.isValidSquare(row, col) && model.isSquareMarked(row, col) == false){
-                model.makeMark(row, col);
-               
+            model.makeMark(row, col);
         }
         else{
-                view.showInputError();
+            view.showInputError();
         }
         
     }
