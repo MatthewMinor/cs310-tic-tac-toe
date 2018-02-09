@@ -96,18 +96,16 @@ public class TicTacToeModel{
         if(isValidSquare(row, col) && (!isSquareMarked(row, col))){
 			if(xTurn){
 					grid[row][col] = Mark.X;
+					xTurn = false;
+					return true;
 			}
 			else{
 					grid[row][col] = Mark.O;
+					xTurn = true;
+					return true;
 			}
-			//this return statement causes a lot of failures in tests but fixes some tests
-			//return true;
         }
-        
-        xTurn = !xTurn;
-
         return false; /* remove this line! */
-        
     }
 	
     public boolean isValidSquare(int row, int col) {
@@ -185,12 +183,12 @@ public class TicTacToeModel{
 				else{
 					countMarks = 0;
 				}
-                if(countMarks == width){
+                if(countMarks == (width)){
                     return true;
                 }
             }
             countMarks = 0;
-        }
+        } 
 		countMarks = 0;
         //check win vertical
         for(int col = 0; col < width; col++){
@@ -201,7 +199,7 @@ public class TicTacToeModel{
                 else{
                     countMarks = 0;
                 }
-                if(countMarks == width){
+                if(countMarks == (width)){
                     return true;
                 }
             }
@@ -216,7 +214,7 @@ public class TicTacToeModel{
 				else{
 					countMarks = 0;
 				}
-                if(countMarks == width){
+                if(countMarks == (width)){
                     return true;
                 }
         }
@@ -230,7 +228,7 @@ public class TicTacToeModel{
 			else{
 				countMarks = 0;
 			}
-			if(countMarks == width){
+			if(countMarks == (width)){
 				return true;
 			}
 		}
