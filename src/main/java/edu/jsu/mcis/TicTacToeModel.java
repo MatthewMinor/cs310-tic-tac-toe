@@ -79,9 +79,9 @@ public class TicTacToeModel{
 
     /*DONE INSERT YOUR CODE HERE */
         for(int i = 0; i < width; i++){
-                for(int j = 0; j < width; j++){
-                        grid[i][j] = Mark.EMPTY;
-                }
+			for(int j = 0; j < width; j++){
+					grid[i][j] = Mark.EMPTY;
+			}
         }
         
     }
@@ -167,12 +167,11 @@ public class TicTacToeModel{
                 
     }
 	
-    private boolean isMarkWin(Mark mark) {
+    protected boolean isMarkWin(Mark mark) {
         
         /* Check the squares of the board to see if the specified mark is the
            winner */
         
-        /*DONE INSERT YOUR CODE HERE */
         int countMarks = 0;
         //check win horizontal
         for(int row = 0; row < width; row++){
@@ -249,7 +248,7 @@ public class TicTacToeModel{
         return false;
     }
 	
-    private boolean isTie() {
+    protected boolean isTie() {
         
         /* Check the squares of the board to see if the game is a tie */
 

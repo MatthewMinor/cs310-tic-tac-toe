@@ -1,5 +1,12 @@
 package edu.jsu.mcis;
 
+import java.awt.*;
+import java.applet.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+
 public class TicTacToe {
 
     private static final int DEFAULT_WIDTH = 3;
@@ -25,21 +32,16 @@ public class TicTacToe {
 
         TicTacToeModel model = new TicTacToeModel(width);
         TicTacToeView view = new TicTacToeView(model);
-        TicTacToeController controller = new TicTacToeController(model, view);
         
-        /* MAIN LOOP */
-
-        while (!model.isGameover()){
-            
-            view.viewModel();
-            controller.controlModel();
-            
-        }
-        
-        /* Game is over; show the final board and the winner */
-
-        view.viewModel();
-        view.showResult(model.getResult().toString());
-
-    }
+		
+		//creating the window
+        JFrame frame = new JFrame("Tic-Tac-Toe");
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//System.out.println("Panel has been added to the frame");
+		frame.pack();
+		frame.setSize(1000, 800);
+		frame.add(view);
+		
+	}
 }
