@@ -106,7 +106,7 @@ public class TicTacToeView extends JPanel implements ActionListener{
     public void showResult(String r) {
 
         /* Display final winner */
-		resultLabel.setText(model.getResult().toString());
+		resultLabel.setText(model.getResult().toString().toUpperCase().trim());
         //System.out.println(r + "!");
 
     }
@@ -131,7 +131,7 @@ public class TicTacToeView extends JPanel implements ActionListener{
 		}
 		else if(model.isTie()){
 			System.out.println(model.getResult());
-			showResult(model.getMark(row, col).toString());
+			showResult(model.getMark(row, col).toString().toUpperCase().trim());
 		}
 	}
 }
